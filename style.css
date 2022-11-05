@@ -6,3 +6,11 @@
 .hide{
     display:none
 }
+.car{
+    width:50px;
+    height:80px;
+    position:absolute;
+    background:red;
+    left:50px;
+    bottom:120px;
+}
