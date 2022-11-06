@@ -28,18 +28,12 @@ function keyUp(e) {
 function gamePlay() {
     // console.log("I am clicked lol")
     if (player.start) {
-        if (keys.ArrowUp) {
-            player.y -= player.speed;
-        }
-        if (keys.ArrowDown) {
-            player.y += player.speed;
-        }
-        if (keys.ArrowLeft) {
-            player.x -= player.speed;
-        }
-        if (keys.ArrowRight) {
-            player.x += player.speed;
-        }
+        let road = gameArea.getBoundingClientRect()
+
+        if (keys.ArrowUp && player.y > (road.top + 20)) { player.y -= player.speed; }
+        if (keys.ArrowDown && player.y < (road.bottom - 80)) { player.y += player.speed; }
+        if (keys.ArrowLeft && player.x > 5) { player.x -= player.speed; }
+        if (keys.ArrowRight && player.x < (road.width - 80)) { player.x += player.speed; }
         car.style.top = player.y + "px"
         car.style.left = player.x + "px"
         window.requestAnimationFrame(gamePlay)
@@ -51,7 +45,12 @@ function startGame() {
     player.start = true;
     gameArea.classList.remove("hide");
     startScreen.classList.add("hide");
-
+    for (i = 0; i < 5; i++) {
+        let roadLine = document.createElement('div');
+        roadLine.setAttribute('class', 'lines');
+        roadLine.style.top = (i * 150) + "px";
+        gameArea.appendChild(roadLine)
+    }
     window.requestAnimationFrame(gamePlay);
 
     gameArea.appendChild(car);

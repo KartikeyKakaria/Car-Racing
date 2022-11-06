@@ -9,8 +9,25 @@
 .car{
     width:50px;
     height:80px;
-    position:absolute;
+    position:relative;
     background:red;
-    left:50px;
+    right:0px;
     top:120px;
+}
+.lines{
+    width:10px;
+    height:100px;
+    background:white;
+    position:absolute;
+    margin-left:190px;
+}
+.gameArea{
+    width:400px;
+    height:100vh;
+    background: #2c3e50;
+    margin:auto;
+    border-left: 12px solid grey;
+    border-right: 12px solid grey;
+    overflow:hidden;
+
 }
