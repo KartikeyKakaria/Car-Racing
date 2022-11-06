@@ -4,7 +4,7 @@ const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
 
 //Some variables for storing data
-let player = {}
+let player = { speed: 5 }
 let keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 let car = document.createElement('div');
 car.setAttribute("class", "car");
@@ -29,21 +29,19 @@ function gamePlay() {
     // console.log("I am clicked lol")
     if (player.start) {
         if (keys.ArrowUp) {
-            player.y -= 5;
-            car.style.top = `${player.y}px`
+            player.y -= player.speed;
         }
         if (keys.ArrowDown) {
-            player.y += 5;
-            car.style.top = `${player.y}px`
+            player.y += player.speed;
         }
         if (keys.ArrowLeft) {
-            player.x -= 5;
-            car.style.left = `${player.y}px`
+            player.x -= player.speed;
         }
         if (keys.ArrowRight) {
-            player.x += 5;
-            car.style.left = `${player.y}px`
+            player.x += player.speed;
         }
+        car.style.top = player.y + "px"
+        car.style.left = player.x + "px"
         window.requestAnimationFrame(gamePlay)
     }
 
@@ -58,7 +56,7 @@ function startGame() {
 
     gameArea.appendChild(car);
 
-    player.x = Number(car.style.left.slice(0, -2))
-    player.y = Number(car.style.top.slice(0, -2))
+    player.x = car.offsetLeft
+    player.y = car.offsetTop
     console.log(player)
 }
