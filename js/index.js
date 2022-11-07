@@ -25,9 +25,44 @@ function keyUp(e) {
     keys[e.key] = false;
 }
 
+function moveLines() {
+    let lines = document.querySelectorAll(".lines");
+    lines.forEach((line) => {
+        if (line.y >= 700) {
+            line.y -= 750
+        }
+        line.y += player.speed;
+        line.style.top = line.y + "px"
+    })
+}
+
+function isCollide(a, b) {
+    aRect = a.getBoundingClientRect()
+    bRect = b.getBoundingClientRect()
+
+    return !((aRect.top > bRect.bottom) || (aRect.bottom < bRect.top) || (aRect.right < bRect.left) || (aRect.left > bRect.right))
+}
+
+function moveEnemy() {
+    let enemies = document.querySelectorAll(".enemy");
+    enemies.forEach((enemy) => {
+        if (isCollide(car, enemy)) {
+            console.log("Boom hit")
+        }
+        if (enemy.y >= 750) {
+            enemy.y -= 1300
+            enemy.style.left = Math.floor(Math.random() * 350) + "px"
+        }
+        enemy.y += player.speed;
+        enemy.style.top = enemy.y + "px"
+
+    })
+}
+
 function gamePlay() {
-    // console.log("I am clicked lol")
     if (player.start) {
+        moveLines()
+        moveEnemy()
         let road = gameArea.getBoundingClientRect()
 
         if (keys.ArrowUp && player.y > (road.top + 20)) { player.y -= player.speed; }
@@ -48,6 +83,7 @@ function startGame() {
     for (i = 0; i < 5; i++) {
         let roadLine = document.createElement('div');
         roadLine.setAttribute('class', 'lines');
+        roadLine.y = (i * 150);
         roadLine.style.top = (i * 150) + "px";
         gameArea.appendChild(roadLine)
     }
@@ -57,5 +93,14 @@ function startGame() {
 
     player.x = car.offsetLeft
     player.y = car.offsetTop
-    console.log(player)
+        // console.log(player)
+    for (i = 0; i < 5; i++) {
+        let enemyCar = document.createElement('div');
+        enemyCar.setAttribute('class', 'enemy');
+        enemyCar.y = (i * 150);
+        enemyCar.style.top = ((i - 1) * 150) * -1 + "px";
+        enemyCar.style.background = "green"
+        enemyCar.style.left = Math.floor(Math.random() * 350) + "px"
+        gameArea.appendChild(enemyCar)
+    }
 }
