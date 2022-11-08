@@ -90,7 +90,7 @@ function gamePlay() {
         let road = gameArea.getBoundingClientRect()
 
         if (keys.ArrowUp && player.y > (road.top + 20)) { player.y -= player.speed; }
-        if (keys.ArrowDown && player.y < (road.bottom - 260)) {
+        if (keys.ArrowDown && player.y < (road.bottom - 80)) {
             console.log(player.y, (road.bottom - 140))
             player.y += player.speed;
         }
