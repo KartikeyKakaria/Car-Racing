@@ -45,7 +45,7 @@ function isCollide(a, b) {
 
 function endGame() {
     player.start = false;
-
+    startScreen.classList.remove('hide')
 }
 
 function moveEnemy() {
@@ -86,8 +86,10 @@ function gamePlay() {
 function startGame() {
     player.start = true;
     player.score = 0;
-    gameArea.classList.remove("hide");
     startScreen.classList.add("hide");
+    gameArea.innerHTML = "";
+    car.style.top = "505px";
+    car.style.left = "-245px";
     for (i = 0; i < 5; i++) {
         let roadLine = document.createElement('div');
         roadLine.setAttribute('class', 'lines');
