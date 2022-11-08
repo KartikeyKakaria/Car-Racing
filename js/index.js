@@ -90,7 +90,10 @@ function gamePlay() {
         let road = gameArea.getBoundingClientRect()
 
         if (keys.ArrowUp && player.y > (road.top + 20)) { player.y -= player.speed; }
-        if (keys.ArrowDown && player.y < (road.bottom + 80)) { player.y += player.speed; }
+        if (keys.ArrowDown && player.y < (road.bottom - 260)) {
+            console.log(player.y, (road.bottom - 140))
+            player.y += player.speed;
+        }
         if (keys.ArrowLeft && player.x > 5) { player.x -= player.speed; }
         if (keys.ArrowRight && player.x < (road.width - 80)) { player.x += player.speed; }
         car.style.top = player.y + "px"
