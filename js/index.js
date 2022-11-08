@@ -2,13 +2,20 @@
 const score = document.querySelector(".score");
 const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
+let highscore;
+if (localStorage.getItem('highscore') == null) {
+    localStorage.setItem('highscore', '0')
+    highscore = 0;
+} else {
+    highscore = Number(localStorage.getItem('highscore'))
+}
 
 //Some variables for storing data
 let player = { speed: 5, score: 0 }
 let keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 let car = document.createElement('div');
 car.setAttribute("class", "car");
-car.innerText = "car";
+car.style.backgroundColor = "red";
 //events for game :)
 startScreen.addEventListener("click", startGame)
 document.addEventListener("keydown", keyDown)
@@ -43,9 +50,21 @@ function isCollide(a, b) {
     return !((aRect.top > bRect.bottom) || (aRect.bottom < bRect.top) || (aRect.right < bRect.left) || (aRect.left > bRect.right))
 }
 
+function randomColor() {
+    function random() {
+        let hex = Math.floor(Math.random() * 256).toString(16)
+        return ("0" + String(hex)).substr(-2)
+    }
+    return "#" + random() + random() + random()
+}
+
 function endGame() {
     player.start = false;
     startScreen.classList.remove('hide')
+    startScreen.innerHTML = `Game Over! <br> Your score was ${player.score+1} <br> Click to start again`;
+    if (player.score > highscore) {
+        localStorage.setItem('highscore', player.score.toString())
+    }
 }
 
 function moveEnemy() {
@@ -71,14 +90,15 @@ function gamePlay() {
         let road = gameArea.getBoundingClientRect()
 
         if (keys.ArrowUp && player.y > (road.top + 20)) { player.y -= player.speed; }
-        if (keys.ArrowDown && player.y < (road.bottom - 80)) { player.y += player.speed; }
+        if (keys.ArrowDown && player.y < (road.bottom + 80)) { player.y += player.speed; }
         if (keys.ArrowLeft && player.x > 5) { player.x -= player.speed; }
         if (keys.ArrowRight && player.x < (road.width - 80)) { player.x += player.speed; }
         car.style.top = player.y + "px"
         car.style.left = player.x + "px"
         window.requestAnimationFrame(gamePlay)
         player.score++;
-        score.innerText = player.score;
+        highscore = Number(localStorage.getItem('highscore'))
+        score.innerHTML = `Score: ${player.score} <br> High Score: ${highscore+1} `;
     }
 
 }
@@ -113,7 +133,7 @@ function startGame() {
             enemyCar.y = i * 150
         }
         enemyCar.style.top = enemyCar.y + "px"
-        enemyCar.style.background = "green"
+        enemyCar.style.backgroundColor = randomColor()
         enemyCar.style.left = Math.floor(Math.random() * 350) + "px"
         gameArea.appendChild(enemyCar)
     }

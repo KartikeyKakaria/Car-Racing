@@ -39,18 +39,22 @@
 
 .car{
 
-    width:50px;
+    width:40px;
     height:80px;
     position:relative;
-    background:red;
+    background-image:url('car.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
     left:-245px;
     top:505px;
 }
 .enemy{
-    width:50px;
-    height:70px;
+    width:40px;
+    height:80px;
     position:relative;
-    background:red;
+    background-image:url('car.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
     top:120px;
 }
 .lines{
@@ -72,6 +76,7 @@
 }
 
 .score{
+    padding:10px;
     display:flex;
     position:absolute;
     top:20px;
