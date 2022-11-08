@@ -88,3 +88,17 @@
     font-size: 1.5em;
     box-shadow: 0 5px 5px black;
 }
+
+#reset{
+    position:absolute;
+    top:90%;
+    left:90%;
+    background-color:black;
+    color:white;
+    border-radius:12px;
+    padding:10px;
+    cursor:pointer;
+}
+#reset:hover{
+    filter:brightness(60%)   
+}

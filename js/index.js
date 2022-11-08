@@ -2,10 +2,11 @@
 const score = document.querySelector(".score");
 const startScreen = document.querySelector(".startScreen");
 const gameArea = document.querySelector(".gameArea");
+const reset = document.querySelector("#reset")
 let highscore;
 if (localStorage.getItem('highscore') == null) {
     localStorage.setItem('highscore', '0')
-    highscore = 0;
+    highscore = -1;
 } else {
     highscore = Number(localStorage.getItem('highscore'))
 }
@@ -18,6 +19,7 @@ car.setAttribute("class", "car");
 car.style.backgroundColor = "red";
 //events for game :)
 startScreen.addEventListener("click", startGame)
+reset.addEventListener("click", resetScore)
 document.addEventListener("keydown", keyDown)
 document.addEventListener("keyup", keyUp)
 
@@ -30,6 +32,10 @@ function keyDown(e) {
 function keyUp(e) {
     e.preventDefault();
     keys[e.key] = false;
+}
+
+function resetScore() {
+    localStorage.setItem('highscore', '-1')
 }
 
 function moveLines() {
@@ -110,6 +116,7 @@ function startGame() {
     player.start = true;
     player.score = 0;
     startScreen.classList.add("hide");
+    reset.classList.add('hide')
     gameArea.innerHTML = "";
     car.style.top = "505px";
     car.style.left = "-245px";
