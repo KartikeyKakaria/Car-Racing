@@ -2,7 +2,30 @@
     margin:0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Josefin Sans', sans-serif;
 }
+
+.startScreen{
+    position:absolute;
+    top:50%;
+    left:50%;
+    background-color:red;
+    transform:translate(-50%, -50%);
+    color:white;
+    z-index:1;
+    text-align:center;
+    border:1px solid #ff6b6b;
+    padding:15px;
+    margin:auto;
+    width:50%;
+    cursor:pointer;
+    letter-spacing:5;
+    font-size:25px;
+    word-spacing:3;
+    text-transform:uppercase;
+    box-shadow: 0 5px 5px black;
+}
+
 .hide{
     display:none
 }
@@ -31,11 +54,25 @@
 }
 .gameArea{
     width:400px;
-    height:100vh;
+    height:800px;
     background: #2c3e50;
     margin:auto;
     border-left: 12px solid grey;
     border-right: 12px solid grey;
     overflow:hidden;
 
+}
+
+.score{
+    display:flex;
+    position:absolute;
+    top:20px;
+    left:40px;
+    background:green;
+    width:200px;
+    height:80px;
+    color:white;
+    justify-content:center;
+    font-size: 1.5em;
+    box-shadow: 0 5px 5px black;
 }
